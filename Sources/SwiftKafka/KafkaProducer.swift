@@ -17,7 +17,6 @@
 import Foundation
 import Crdkafka
 import Dispatch
-import Logging
 
 /**
  A threadsafe `KafkaClient` for producing messages to a topic on a broker. 

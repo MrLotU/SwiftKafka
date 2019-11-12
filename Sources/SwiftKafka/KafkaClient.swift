@@ -16,7 +16,6 @@
 
 import Crdkafka
 import Foundation 
-import Logging
 
 /// A class for clients that will connect to a Kafka server.  
 /// This can either be a `KafkaConsumer` or a `KafkaProducer`.
@@ -27,8 +26,6 @@ public class KafkaClient {
 
     // Pointer to the C handler for Kafka
     let kafkaHandle: OpaquePointer
-    
-    static let logger: Logger = Logger(label: "KafkaClientLogger")
     
     // Is this client a Kafka consumer or producer
     enum ClientType {
@@ -44,7 +41,7 @@ public class KafkaClient {
         // If consumer has not set a groupID, use a random UUID.
         if clientType == .consumer && config.groupId == nil {
             let uuid = UUID().uuidString
-            KafkaClient.logger.debug("Unique consumer group created with UUID: \(uuid)")
+            print("Unique consumer group created with UUID: \(uuid)")
             rd_kafka_conf_set(configPointer, "group.id", uuid, nil, 0)
         }
         // Create a new `rd_kafka_t` object using the config and return an opaque pointer to that object. 

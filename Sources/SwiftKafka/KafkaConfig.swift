@@ -17,7 +17,6 @@
 
 import Foundation
 import Crdkafka
-import Logging
 
 /**
  The configuration settings for a Kafka consumer/producer.
@@ -701,7 +700,7 @@ public class KafkaConfig {
         // The third input should be a id pointer provided by the producer send however this didn't seem to work.
         rd_kafka_conf_set_dr_msg_cb(self.pointer, { (kafkaHandle, message, _) -> Void in
             guard let kafkaHandle = kafkaHandle, let message = message else {
-                KafkaProducer.logger.error("Internal error: No message returned in message callback.")
+                print("Internal error: No message returned in message callback.")
                 return
             }
             KafkaProducer.callbackSemaphore.wait()
