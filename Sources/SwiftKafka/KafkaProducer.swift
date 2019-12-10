@@ -113,7 +113,7 @@ public class KafkaProducer: KafkaClient {
         let idPointer = UnsafeMutableRawPointer.allocate(byteCount: 1, alignment: 0)
         let responseCode = rd_kafka_produce(topicPointer,
                                             producerRecord.partition,
-                                            RD_KAFKA_MSG_F_COPY,
+                                            RD_KAFKA_MSG_F_BLOCK,
                                             UnsafeMutablePointer<UInt8>(mutating: [UInt8](producerRecord.value)),
                                             producerRecord.value.count,
                                             keyBytes,
